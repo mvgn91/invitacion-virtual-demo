@@ -1,172 +1,138 @@
-# 💍 Invitación de Boda — Jorge & Noemí
+# 💍 Invitación de Boda Digital — Demo Template / Plantilla Comercial
 
-<p align="center">
-  <img src="https://img.shields.io/badge/MVGN-COMPLETED-success?style=for-the-badge&labelColor=590f2f&color=c4176a" alt="MVGN State: COMPLETED" />
-  <img src="https://img.shields.io/badge/v1.0.0-2025--11--15-890f2d?style=for-the-badge&labelColor=590f2f" alt="v1.0.0" />
-  <img src="https://img.shields.io/badge/React_18-61DAFB?style=for-the-badge&logo=react&labelColor=590f2f" alt="React 18" />
-  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&labelColor=590f2f" alt="Vite" />
-  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&labelColor=590f2f" alt="Tailwind CSS" />
-</p>
+<div align="center">
+  <br/>
+  <p>
+    <strong>✨ React 18</strong> •
+    <strong>⚡ Vite</strong> •
+    <strong>🎨 Tailwind CSS</strong> •
+    <strong>🪄 Framer Motion</strong>
+  </p>
+  <br/>
+  <a href="https://invitaciondebodademo.vercel.app" target="_blank">
+    <img src="https://img.shields.io/badge/🌐_Demo_Online-FF6B8A?style=for-the-badge" alt="Demo Online"/>
+  </a>
+  <a href="#">
+    <img src="https://img.shields.io/badge/📦_Descargar_Plantilla-22c55e?style=for-the-badge" alt="Descargar"/>
+  </a>
+</div>
 
-<p align="center">
-  <strong>Jorge Isaac Mata Guerrero</strong> 💍 <strong>Noemí Sarahi Hernández Arevalos</strong>
-  <br />
-  📅 15 de Noviembre, 2025 · 7:00 PM
-</p>
-
----
-
-> **MVGN System** — Proyecto gestionado con [MVGN Starter Kit v2.1](https://github.com/mvgn91/mvgnlabs-starter-kit).
-> Capas del sistema en [`docs/`](./docs/) y configuración en [`.mvgn/`](./.mvgn/).
-
----
-
-## 📋 Estado del Proyecto (MVGN)
-
-| Campo | Valor |
-|-------|-------|
-| **Estado** | ✅ `COMPLETED` |
-| **Tareas** | 22 / 22 completadas |
-| **Versión** | v1.0.0 |
-| **Capas MVGN** | [`session-contract`](./.mvgn/session-contract.md) · [`kernel-spec`](./.mvgn/kernel-spec.md) · [`system-rules`](./.mvgn/system-rules.md) · [`execution-engine`](./.mvgn/execution-engine.md) · [`recovery-protocol`](./.mvgn/recovery-protocol.md) · [`authority-map`](./.mvgn/authority-map.md) · [`finalization-protocol`](./.mvgn/finalization-protocol.md) |
-| **Despliegue** | [boda-jorge-noemi.vercel.app](https://boda-jorge-noemi.vercel.app) |
-| **Repositorio** | [github.com/mvgn91/INVITACION-DE-BODA-JORGE-MATA](https://github.com/mvgn91/INVITACION-DE-BODA-JORGE-MATA) |
+<br/>
 
 ---
 
-## 📚 Documentación del Sistema
+## 📋 Descripción
 
-El proyecto sigue el ciclo de desarrollo del **MVGN Starter Kit**. Toda la documentación está disponible en `docs/`:
+**Plantilla comercial** de invitación digital de boda interactiva con diseño **glassmorphism**. 100% frontend, lista para personalizar con los datos de cada pareja. Ideal para bodas, aniversarios y eventos especiales.
 
-| Documento | Descripción |
-|-----------|-------------|
-| [`docs/00_idea.md`](./docs/00_idea.md) | Idea original del proyecto |
-| [`docs/01_prd.md`](./docs/01_prd.md) | Requisitos funcionales y no funcionales (15 RFs, 12 RNFs) |
-| [`docs/02_architecture.md`](./docs/02_architecture.md) | Arquitectura, componentes y decisiones técnicas (6 ADRs) |
-| [`docs/03_tasks.md`](./docs/03_tasks.md) | Desglose de 22 tareas completadas |
-| [`docs/04_changelog.md`](./docs/04_changelog.md) | Historial de cambios del proyecto |
-| [`docs/05_lessons_learned.md`](./docs/05_lessons_learned.md) | Incidentes y lecciones aprendidas |
-| [`docs/06_state_report.md`](./docs/06_state_report.md) | Reporte de estado del sistema |
+Desarrollada con **React 18**, **Vite**, **Tailwind CSS** y **Framer Motion** — ofrece una experiencia visual elegante, fluida y completamente responsiva.
 
 ---
 
 ## ✨ Características
 
-- **🎨 Diseño Elegante**: Paleta Burgundy/Rose/Wine/Pearl con tipografía Fraunces + Poppins
-- **📱 Responsive**: Mobile First (320px → 2560px) con breakpoints sm/md/lg/xl/2xl
-- **🖼️ Carrusel Hero**: Auto-rotación de imágenes cada 6 segundos con transiciones suaves
-- **⏱️ Countdown**: Cuenta regresiva en tiempo real hasta el gran día
-- **🗺️ Mapas Interactivos**: Google Maps embebido para ceremonia y recepción
-- **📅 Calendario**: Enlaces a Google Calendar e iCal para recordar la fecha
-- **🎯 RSVP**: Formulario de confirmación con validaciones y almacenamiento en Google Sheets
-- **👔 Código de Vestimenta**: Etiqueta obligatoria con colores prohibidos
-- **🎁 Mesa de Regalos**: Enlaces a Liverpool y Amazon
-- **⚡ Optimizado**: Lazy loading, code splitting, imágenes lazy, scroll throttling
-- **✨ Animaciones**: Efectos con Framer Motion, partículas flotantes, WebGL Plasma
-- **🌐 SEO**: Meta tags Open Graph y Twitter Cards para compartir en redes
+| Funcionalidad | Descripción |
+|:---|---|
+| 🎠 **Hero Parallax** | Animaciones interactivas con glassmorphism y partículas decorativas |
+| ⏱️ **Cuenta Regresiva** | Timer en tiempo real hasta la fecha del evento |
+| 📍 **Ceremonia & Recepción** | Dos ubicaciones con mapas interactivos y navegación por tabs |
+| 👔 **Código de Vestimenta** | Guía visual con colores recomendados y a evitar |
+| 🎁 **Mesa de Regalos** | Integración con Liverpool y Amazon |
+| 📝 **RSVP** | Formulario de confirmación con validación completa |
+| 🌓 **Modo Oscuro/Claro** | Toggle con persistencia en localStorage |
+| 📱 **Responsive** | Diseño mobile-first optimizado para todos los dispositivos |
+| 🚀 **Rendimiento** | Lazy loading, code splitting, preload de recursos críticos |
+| 📅 **Calendario** | Enlaces a Google Calendar e iCal |
+| 🎯 **Demo Disclaimer** | Banner flotante personalizable (ideal para mostrar a clientes) |
 
 ---
 
-## 🛠️ Stack Tecnológico
+## 🚀 Stack Tecnológico
 
-| Capa | Tecnología | Versión |
-|------|-----------|---------|
-| **Framework** | React | ^18.2.0 |
-| **Build** | Vite | ^4.4.5 |
-| **Estilos** | Tailwind CSS | ^3.3.3 |
-| **Animaciones** | Framer Motion | ^10.16.4 |
-| **Iconos** | Lucide React | ^0.542.0 |
-| **Email** | EmailJS | ^4.3.2 |
-| **Backend RSVP** | Google Sheets API | — |
-| **Despliegue** | Vercel | — |
+| Capa | Tecnología |
+|:---|---|
+| **Framework** | React 18 |
+| **Bundler** | Vite 4 |
+| **Estilos** | Tailwind CSS 3 |
+| **Animaciones** | Framer Motion 10 |
+| **Iconos** | Lucide React |
+| **Deploy** | Vercel |
 
 ---
 
-## 📐 Arquitectura
-
-```
-SPA React 18 → Vite Build → Vercel CDN
-     │
-     ├── 13 Componentes UI (lazy loading)
-     ├── 3 Custom Hooks (scroll, intersection, preload)
-     ├── Google Sheets (RSVP storage)
-     └── EmailJS (notificaciones)
-```
-
-Detalles completos en [`docs/02_architecture.md`](./docs/02_architecture.md).
-
----
-
-## 🚀 Instalación y Desarrollo
+## 🛠️ Instalación
 
 ```bash
 # Clonar el repositorio
-git clone https://github.com/mvgn91/INVITACION-DE-BODA-JORGE-MATA.git
-cd INVITACION-DE-BODA-JORGE-MATA
+git clone https://github.com/mvgn91/invitacion-virtual-demo.git
+
+# Entrar al directorio
+cd invitacion-virtual-demo
 
 # Instalar dependencias
 npm install
 
-# Desarrollo (localhost:3000)
+# Iniciar servidor de desarrollo
 npm run dev
 
-# Build para producción
+# Build de producción
 npm run build
-
-# Vista previa del build
-npm run preview
 ```
 
 ---
 
-## 📧 Configuración de EmailJS
+## 🔧 Personalización para clientes
 
-1. Crea una cuenta en [EmailJS](https://www.emailjs.com/)
-2. Configura tu servicio de correo
-3. Actualiza las credenciales en `src/config/emailjs.example.js`
-4. Renombra el archivo a `src/config/emailjs.js`
+1. **Reemplazar datos del evento** en los componentes correspondientes:
+   - `src/components/Hero.jsx` — Nombres de los novios
+   - `src/components/Countdown.jsx` — Fecha del evento
+   - `src/components/EventLocations.jsx` — Ubicaciones y mapas
 
-> **Nota:** `src/config/emailjs.js` está en `.gitignore` por seguridad.
+2. **Configurar RSVP real** (opcional):
+   - Crear cuenta en [EmailJS](https://www.emailjs.com/)
+   - Configurar credenciales en `src/config/emailjs.example.js`
 
----
+3. **Reemplazar imágenes** de Unsplash con fotos reales de la pareja
 
-## 🎨 Paleta de Colores
-
-| Color | Hex | Uso |
-|-------|-----|-----|
-| **Burgundy** | `#590f2f` | Fondos oscuros, encabezados |
-| **Rose** | `#c4176a` | Acentos, botones, hover |
-| **Wine** | `#890f2d` | Tonos profundos |
-| **Pearl** | `#d1dadc` | Textos sobre fondos oscuros |
+4. **Actualizar SEO** en `index.html`:
+   - Meta tags (título, descripción, Open Graph)
+   - Favicon
 
 ---
 
-## 🏗️ MVGN System
+## 📂 Estructura del Proyecto
 
-Este proyecto utiliza el **MVGN Starter Kit v2.1**, un framework de orquestación para desarrollo asistido por IA.
+```
+├── index.html               ← Entry point HTML con SEO
+├── src/
+│   ├── main.jsx             ← Entry point React
+│   ├── App.jsx              ← Componente raíz (lazy loading)
+│   ├── components/          ← 15 componentes de UI
+│   ├── config/              ← Configuración (EmailJS, Google Sheets)
+│   ├── context/             ← ThemeContext (modo oscuro)
+│   └── hooks/               ← Custom hooks (intersection, preload, scroll)
+├── docs/                    ← Documentación MVGN del proyecto
+├── dist/                    ← Build de producción
+└── vercel.json              ← Configuración Vercel
+```
 
-| Capa | Archivo | Propósito |
-|------|---------|-----------|
-| **Session Contract** | [`.mvgn/session-contract.md`](./.mvgn/session-contract.md) | Comportamiento de la IA en sesión |
-| **Kernel Spec** | [`.mvgn/kernel-spec.md`](./.mvgn/kernel-spec.md) | Orquestación y arbitraje |
-| **Recovery Protocol** | [`.mvgn/recovery-protocol.md`](./.mvgn/recovery-protocol.md) | Resiliencia y recuperación |
-| **Finalization Protocol** | [`.mvgn/finalization-protocol.md`](./.mvgn/finalization-protocol.md) | Cierre y release |
-| **System Rules** | [`.mvgn/system-rules.md`](./.mvgn/system-rules.md) | Políticas y restricciones |
-| **Execution Engine** | [`.mvgn/execution-engine.md`](./.mvgn/execution-engine.md) | Ejecución de tareas |
-| **Authority Map** | [`.mvgn/authority-map.md`](./.mvgn/authority-map.md) | Jerarquía de autoridad |
+> **Nota:** El código fuente está dentro del directorio `DEMO VERSION DEFINITIVA/`.
 
 ---
 
-## 📄 Créditos
+## 🌐 Demo en Vivo
 
-Desarrollado por **MVGN Labs** — [mvgn.vercel.app](https://mvgn.vercel.app)
+[🔗 invitaciondebodademo.vercel.app](https://invitaciondebodademo.vercel.app)
+
+---
+
+## 📄 Licencia
+
+**© 2026 MVGN Labs** — Todos los derechos reservados.  
+Esta es una plantilla comercial. No está permitida su redistribución sin autorización.
 
 ---
 
 <p align="center">
-  <strong>#BodaNoemiYJorge</strong>
-  <br />
-  <em>"El amor verdadero no consiste en mirarse el uno al otro, sino en mirar juntos en la misma dirección"</em>
-  <br />
-  — Antoine de Saint-Exupéry
+  Hecho con ❤️ por <a href="https://mvgn.vercel.app" target="_blank"><strong>MVGN Labs</strong></a>
 </p>
