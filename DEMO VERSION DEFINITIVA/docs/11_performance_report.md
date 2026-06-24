@@ -1,6 +1,6 @@
 # 11 — Performance Report
 
-> **Proyecto:** Invitación de Boda Digital Interactiva (Demo)
+> **Proyecto:** Invitación de Boda Digital - Demo Template / Plantilla Comercial
 > **Versión:** v1.0.0
 > **Generado:** 2026-06-24 por MVGN Finalization Protocol
 > **Propósito:** Evaluación de rendimiento del ciclo de desarrollo para retroalimentación del sistema MVGN
@@ -11,7 +11,7 @@
 
 | Métrica | Valor |
 |---------|-------|
-| **Nombre** | Invitación de Boda Digital Interactiva (Demo) |
+| **Nombre** | Invitación de Boda Digital - Demo Template / Plantilla Comercial |
 | **Versión** | v1.0.0 |
 | **Total tareas** | 22 |
 | **Tareas completadas** | 21 (+1 FT-001 Finalization) |

@@ -1,6 +1,6 @@
 # 03 — Desglose de Tareas
 
-> **Proyecto:** Invitación de Boda Digital Interactiva (Demo)
+> **Proyecto:** Invitación de Boda Digital - Demo Template / Plantilla Comercial
 > **Versión:** v1.0.0
 
 ---

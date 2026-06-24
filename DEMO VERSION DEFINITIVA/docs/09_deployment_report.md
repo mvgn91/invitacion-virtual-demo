@@ -1,6 +1,6 @@
 # 09 — Deployment Report
 
-> **Proyecto:** Invitación de Boda Digital Interactiva (Demo)
+> **Proyecto:** Invitación de Boda Digital - Demo Template / Plantilla Comercial
 > **Versión:** v1.0.0
 > **Generado:** por MVGN Finalization Protocol
 
@@ -10,7 +10,7 @@
 
 | Campo | Valor |
 |-------|-------|
-| **URL de producción** | https://invitacion-boda-demo.vercel.app |
+| **URL de producción** | https://invitaciondebodademo.vercel.app |
 | **Framework** | Vite 4.4.5 |
 | **Directorio de salida** | `dist/` |
 | **Comando de build** | `npm run build` |

@@ -1,7 +1,6 @@
 # 05 — Lecciones Aprendidas
 
-> **Proyecto:** Invitación de Boda Digital Interactiva (Demo)
-> **Versión:** v1.0.0
+> **Proyecto:** Invitación de Boda Digital - Demo Template / Plantilla Comercial
 
 ---
 
@@ -39,8 +38,8 @@
 
 **Proyecto:** Invitación de Boda Digital Interactiva (Demo)
 **Versión final:** v1.0.0
-**Nombre definitivo:** invitacion-boda-demo_v1.0.0_PRODUCTION
-**URL producción:** https://invitacion-boda-demo.vercel.app
+**Nombre definitivo:** invitaciondebodademo_v1.0.0_PRODUCTION
+**URL producción:** https://invitaciondebodademo.vercel.app
 **Protocolo ejecutado:** Finalization Protocol v1.0
 **Fases completadas:** VERIFY → DOCUMENT → NOMENCLATE → SEAL → RELEASE
 **Documentos generados:**

@@ -1,12 +1,12 @@
 # 01 — Product Requirements Document (PRD)
 
-> **Proyecto:** Invitación de Boda Digital Interactiva (Demo)
+> **Proyecto:** Invitación de Boda Digital - Demo Template / Plantilla Comercial
 > **Versión:** v1.0.0
 > **Estado:** APROBADO
 
 ## Resumen
 
-Invitación digital de boda interactiva con diseño glassmorphism, desarrollada como demo de portafolio. Sitio 100% frontend con capacidades modernas de React.
+Plantilla comercial de invitación digital de boda interactiva con diseño glassmorphism. Producto 100% frontend listo para personalizar con los datos de cada pareja. Desarrollado con React 18, Vite y Tailwind CSS.
 
 ---
 

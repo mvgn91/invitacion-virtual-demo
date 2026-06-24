@@ -1,6 +1,6 @@
 # 02 — Arquitectura
 
-> **Proyecto:** Invitación de Boda Digital Interactiva (Demo)
+> **Proyecto:** Invitación de Boda Digital - Demo Template / Plantilla Comercial
 > **Versión:** v1.0.0
 > **Estado:** APROBADO
 
@@ -15,7 +15,7 @@
 | Estilos | Tailwind CSS | 3.3 | Utilidades first, diseño consistente, responsive fácil |
 | Animaciones | Framer Motion | 10.16 | API declarativa, animaciones fluidas, soporte gestos |
 | Iconos | Lucide React | 0.542 | Iconos ligeros, tree-shakeable, diseño consistente |
-| Email | EmailJS | 4.3 | Simulación demo, sin backend |
+| Email | EmailJS | 4.3 | Integración opcional para RSVP real |
 | Deploy | Vercel | — | Deploy automático, SSL, CDN global |
 
 ## 2. Arquitectura de Componentes

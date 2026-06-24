@@ -1,6 +1,6 @@
 # 04 — Changelog
 
-> **Proyecto:** Invitación de Boda Digital Interactiva (Demo)
+> **Proyecto:** Invitación de Boda Digital - Demo Template / Plantilla Comercial
 
 ## [1.0.0] — 2026-06-24
 
@@ -44,5 +44,5 @@
 
 - Finalization Protocol ejecutado
 - Documentación de cierre generada (07-11)
-- Proyecto renombrado a: `invitacion-boda-demo_v1.0.0_PRODUCTION`
+- Proyecto renombrado a: `invitaciondebodademo_v1.0.0_PRODUCTION`
 - Estado: COMPLETED

@@ -1,13 +1,13 @@
 # 00 — Idea del Proyecto
 
-> **Proyecto:** Invitación de Boda Digital Interactiva (Demo)
-> **Fecha:** Noviembre 2026
+> **Proyecto:** Invitación de Boda Digital - Demo Template / Plantilla Comercial
+> **Versión:** v1.0.0
 > **Por:** MVGN Labs
 
 ## Descripción
 
-Invitación digital de boda interactiva construida con React 18, Vite y Tailwind CSS. 
-Diseñada como demo de portafolio para mostrar capacidades de desarrollo frontend moderno.
+Plantilla comercial de invitación digital de boda interactiva, construida con React 18, Vite y Tailwind CSS.
+Diseñada como producto vendible para parejas que desean una invitación digital moderna y elegante.
 
 ## Funcionalidades principales
 
@@ -19,15 +19,16 @@ Diseñada como demo de portafolio para mostrar capacidades de desarrollo fronten
 - Formulario RSVP con simulación de envío
 - Tour interactivo del sitio
 - Modo oscuro/claro
-- Demo disclaimer flotante
+- Demo disclaimer flotante (personalizable)
 - Diseño completamente responsivo
 - Optimización de rendimiento con lazy loading
+- Enlaces a Google Calendar e iCal
 
 ## Público objetivo
 
-- Parejas que buscan inspiración para su invitación digital
-- Reclutadores/empleadores evaluando habilidades técnicas
-- Desarrolladores buscando referencias de implementación
+- Parejas que buscan una invitación digital moderna para su boda
+- Organizadores de eventos que quieren una solución digital
+- Desarrolladores que buscan una base sólida para proyectos de invitaciones
 
 ## Stack tecnológico
 

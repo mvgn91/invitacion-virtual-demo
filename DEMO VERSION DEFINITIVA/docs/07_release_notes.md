@@ -1,6 +1,6 @@
 # 07 — Release Notes
 
-> **Proyecto:** Invitación de Boda Digital Interactiva (Demo)
+> **Proyecto:** Invitación de Boda Digital - Demo Template / Plantilla Comercial
 > **Versión:** v1.0.0
 > **Release:** 2026-06-24
 > **Generado:** por MVGN Finalization Protocol
@@ -9,7 +9,7 @@
 
 ## Resumen
 
-Invitación digital de boda interactiva con diseño glassmorphism, desarrollada como demo de portafolio para mostrar capacidades de desarrollo frontend moderno con React 18, Vite, Tailwind CSS y Framer Motion.
+Plantilla comercial de invitación digital de boda interactiva con diseño glassmorphism. Producto 100% frontend listo para personalizar con los datos de cada pareja. Desarrollado con React 18, Vite, Tailwind CSS y Framer Motion.
 
 ## Novedades en esta versión
 
@@ -68,6 +68,6 @@ src/
 
 ## Enlaces
 
-- **Sitio en producción:** https://invitacion-boda-demo.vercel.app
+- **Sitio en producción:** https://invitaciondebodademo.vercel.app
 - **Repositorio:** https://github.com/mvgn91/invitacion-virtual-demo
 - **Documentación:** docs/

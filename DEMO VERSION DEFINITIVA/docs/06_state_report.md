@@ -23,7 +23,7 @@
 | `dist/` | ✅ Build de producción verificado |
 | `Deploy` | ✅ Activo en producción (Vercel) |
 | `.mvgn/` | ✅ Estado del sistema preservado |
-| **Proyecto sellado como:** | `invitacion-boda-demo_v1.0.0_PRODUCTION` |
+| **Proyecto sellado como:** | `invitaciondebodademo_v1.0.0_PRODUCTION` |
 
 ---
 
@@ -31,10 +31,10 @@
 
 | Elemento | Valor |
 |----------|-------|
-| **SLUG** | `invitacion-boda-demo` |
+| **SLUG** | `invitaciondebodademo` |
 | **SEMVER** | `v1.0.0` |
 | **TIER** | `PRODUCTION` |
-| **Nombre definitivo** | `invitacion-boda-demo_v1.0.0_PRODUCTION` |
+| **Nombre definitivo** | `invitaciondebodademo_v1.0.0_PRODUCTION` |
 | **Repo URL** | https://github.com/mvgn91/invitacion-virtual-demo |
-| **Producción URL** | https://invitacion-boda-demo.vercel.app |
+| **Producción URL** | https://invitaciondebodademo.vercel.app |
 | **Release tag** | `v1.0.0-20260624` |

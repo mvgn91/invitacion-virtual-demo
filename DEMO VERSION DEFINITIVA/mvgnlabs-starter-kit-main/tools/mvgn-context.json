@@ -14,7 +14,7 @@
   "authority": "loaded",
   "authority_file": ".mvgn/authority-map.md",
   "authority_priority": "Contract > Kernel > Recovery > Rules > Engine",
-  "last_action": "Finalization Protocol ejecutado completamente. Proyecto sellado como invitacion-boda-demo_v1.0.0_PRODUCTION",
+  "last_action": "Finalization Protocol ejecutado completamente. Proyecto sellado como invitaciondebodademo_v1.0.0_PRODUCTION",
   "next_action": "",
   "layers": {
     "rules": "loaded",
