@@ -31,7 +31,6 @@ const usePreload = (resources = []) => {
       }
     };
 
-    // Preload imágenes críticas
     resources.forEach(resource => {
       if (typeof resource === 'string' && (resource.includes('.jpg') || resource.includes('.png') || resource.includes('.webp'))) {
         const img = new Image();
@@ -39,7 +38,6 @@ const usePreload = (resources = []) => {
         img.onerror = () => handleError(resource);
         img.src = resource;
       } else if (typeof resource === 'string' && resource.includes('.css')) {
-        // Preload CSS
         const link = document.createElement('link');
         link.rel = 'preload';
         link.as = 'style';
@@ -50,9 +48,7 @@ const usePreload = (resources = []) => {
       }
     });
 
-    return () => {
-      // Cleanup si es necesario
-    };
+    return () => {};
   }, [resources]);
 
   return { loadedResources, isLoading };

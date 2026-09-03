@@ -2,20 +2,20 @@
 
 ## 📋 Preparación Previa
 
-### 1. Configurar EmailJS (Opcional)
-```bash
-# Copiar archivo de configuración
-cp src/config/emailjs.example.js src/config/emailjs.js
+### 1. Configurar el RSVP (Google Sheets + Google Apps Script)
+El formulario RSVP de esta demo se integra con **Google Sheets** mediante **Google Apps Script** (ver `google-apps-script.js` y `INSTRUCCIONES_GOOGLE_SHEETS.md`).
 
-# Editar con tus credenciales de EmailJS
-# - Service ID
-# - Template ID  
-# - Public Key
+La versión demo trae el envío **desactivado** (`src/config/googleSheets.js`: `GOOGLE_SCRIPT_URL = ''`), así que solo simula el registro y no recibe datos reales.
+
+Para activar el registro real:
+```bash
+# Abrir src/config/googleSheets.js y completar:
+#   GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/<DEPLOY_ID>/exec'
 ```
 
 ### 2. Verificar Variables de Entorno
 - No se requieren variables de entorno para el funcionamiento básico
-- EmailJS es opcional para el formulario RSVP
+- EmailJS es **opcional** (la demo usa Google Sheets como mecanismo de registro por defecto)
 
 ## 🌐 Deployment en Vercel (Recomendado)
 
@@ -26,7 +26,7 @@ cp src/config/emailjs.example.js src/config/emailjs.js
    git add .
    git commit -m "Initial commit: Wedding invitation site"
    git branch -M main
-   git remote add origin https://github.com/tu-usuario/invitacion-boda-jorge-mata.git
+   git remote add origin https://github.com/mvgn91/invitacion-virtual-demo.git
    git push -u origin main
    ```
 
@@ -127,8 +127,9 @@ npx vite-bundle-analyzer dist
    - Comprobar que estén en `public/`
 
 3. **Formulario RSVP no funciona**:
-   - Configurar EmailJS correctamente
-   - Verificar credenciales
+   - Verificar `GOOGLE_SCRIPT_URL` en `src/config/googleSheets.js`
+   - Confirmar que el Google Apps Script está desplegado como Web App
+   - Revisar que la hoja de cálculo sea accesible para el script
 
 4. **Fuentes no cargan**:
    - Verificar conexión a Google Fonts
@@ -191,7 +192,8 @@ npm audit
 - [ ] Meta tags configurados
 - [ ] Favicon actualizado
 - [ ] URLs de producción actualizadas
-- [ ] EmailJS configurado (opcional)
+- [ ] Google Sheets / Apps Script configurado (opcional)
+- [ ] `GOOGLE_SCRIPT_URL` completado en `src/config/googleSheets.js` (opcional)
 
 ## 📞 Soporte
 

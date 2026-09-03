@@ -1,6 +1,5 @@
 import { useEffect, useRef, useCallback } from 'react';
 
-// Hook para throttling
 const useThrottle = (callback, delay) => {
   const lastRun = useRef(Date.now());
   
@@ -12,7 +11,6 @@ const useThrottle = (callback, delay) => {
   }, [callback, delay]);
 };
 
-// Hook para debouncing
 const useDebounce = (callback, delay) => {
   const timeoutRef = useRef(null);
   
@@ -27,10 +25,9 @@ const useDebounce = (callback, delay) => {
   }, [callback, delay]);
 };
 
-// Hook principal para optimización de scroll
 const useScrollOptimization = (options = {}) => {
   const {
-    throttleDelay = 16, // ~60fps
+    throttleDelay = 16,
     debounceDelay = 100,
     onScroll = () => {},
     onScrollEnd = () => {},
@@ -57,10 +54,7 @@ const useScrollOptimization = (options = {}) => {
     };
   }, [throttledScroll, debouncedScrollEnd, enablePassive]);
 
-  return {
-    throttledScroll,
-    debouncedScrollEnd
-  };
+  return { throttledScroll, debouncedScrollEnd };
 };
 
 export { useThrottle, useDebounce, useScrollOptimization };

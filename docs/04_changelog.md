@@ -1,44 +1,48 @@
-# 04 — Registro de Cambios
+# 04 — Changelog
 
-> **Proyecto:** Invitación de Boda — Jorge & Noemí
+> **Proyecto:** Invitación de Boda Digital - Demo Template / Plantilla Comercial
 
----
+## [1.0.0] — 2026-06-24
 
-## [v1.0.0] — 2026-06-24
+### Added
+- Proyecto inicial con Vite + React 18
+- Hero animado con glassmorphism y parallax
+- Cuenta regresiva en tiempo real
+- Secciones de Ceremonia y Recepción con mapas
+- Código de vestimenta
+- Mesa de regalos (Liverpool + Amazon)
+- Formulario RSVP con validación
+- Demo Disclaimer flotante
+- Modo oscuro/claro con ThemeContext
+- Tour interactivo del sitio (SiteTour)
+- Navegación sticky con menú mobile responsivo
+- Enlaces a Google Calendar e iCal
+- Lazy loading con React.lazy + Suspense
+- Code splitting (vendor, framer, icons)
+- Diseño responsivo completo
+- Meta tags para SEO
+- Footer con créditos
+- ScrollToTop button
+- Glassmorphism system (crystal-glass classes)
+- Preload de recursos críticos
+- Optimización de rendimiento (memo, useMemo, useCallback)
+
+### Changed
+- Unificación de CeremonyDetails + Reception en EventLocations con tabs
+- Optimización de imágenes con Unsplash
+
+### Fixed
+- Renderizado condicional en modo oscuro
+- Animaciones con will-change para mejor performance
+
+### Documentation
+- MVGN system initialized with full documentation
+- PRD, Architecture, Tasks, Changelog, Lessons, State Report created
+- Finalization Protocol executed (VERIFY → DOCUMENT → NOMENCLATE → SEAL → RELEASE)
 
 ### Proyecto sellado
 
 - Finalization Protocol ejecutado
-- Documentación MVGN generada (docs/00-06)
+- Documentación de cierre generada (07-11)
+- Proyecto renombrado a: `invitaciondebodademo_v1.0.0_PRODUCTION`
 - Estado: COMPLETED
-
-### Cambios realizados
-
-- Implementación de lazy loading para componentes pesados
-- Optimización de rendimiento con memoización y callbacks
-- Pre-carga de recursos críticos
-- Actualización de estilo responsive en DressCode
-- Agregado componente DressCode con validación en formulario RSVP
-- Mejora de estilos en encabezados de CeremonyDetails y Reception
-- Actualización de ubicación: Salón de eventos STAUdeG
-- Actualización de enlaces de navegación
-- Mejora del layout de mesa de regalos
-- Actualización de nombres en Footer y Header
-- Cambio de fecha límite de confirmación en RSVP
-- Implementación de campos para nombres de acompañantes en formulario
-- Integración con Google Sheets para almacenamiento de RSVPs
-- Configuración de EmailJS para notificaciones
-- Implementación de efecto Plasma WebGL
-- Sistema de tipografía responsive (Mobile First)
-- Paleta de colores elegante (Burgundy, Rose, Wine, Pearl)
-- Animaciones con Framer Motion
-- Meta tags Open Graph y Twitter Cards
-- Deploy en Vercel
-
----
-
-## Historial de Cambios
-
-| Fecha | Versión | Cambio | Autor |
-|------|---------|--------|-------|
-| 2026-06-24 | v1.0.0 | Documento creado basado en git history | MVGN System |

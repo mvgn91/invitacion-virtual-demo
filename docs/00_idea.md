@@ -1,30 +1,40 @@
 # 00 — Idea del Proyecto
 
-> **Proyecto:** Invitación de Boda — Jorge & Noemí
-> **Fecha:** 24 de junio, 2026
+> **Proyecto:** Invitación de Boda Digital - Demo Template / Plantilla Comercial
 > **Versión:** v1.0.0
+> **Por:** MVGN Labs
 
-## Resumen
+## Descripción
 
-Invitación digital interactiva y elegante para la boda de **Jorge Isaac Mata Guerrero** y **Noemí Sarahi Hernández Arevalos**, celebrada el **15 de Noviembre, 2025** a las **7:00 PM**.
+Plantilla comercial de invitación digital de boda interactiva, construida con React 18, Vite y Tailwind CSS.
+Diseñada como producto vendible para parejas que desean una invitación digital moderna y elegante.
 
-El sitio web permite a los invitados:
-- Ver detalles de la ceremonia y recepción
-- Confirmar asistencia (RSVP) vía formulario
-- Consultar código de vestimenta
-- Acceder a la mesa de regalos (Liverpool y Amazon)
-- Ver mapa y direcciones de ambas ubicaciones
+## Funcionalidades principales
 
-## Stack Tecnológico Propuesto
+- Hero section con animaciones parallax y glassmorphism
+- Cuenta regresiva en tiempo real
+- Sección de ceremonia y recepción con mapas interactivos
+- Código de vestimenta con diseño responsivo
+- Mesa de regalos (Liverpool y Amazon)
+- Formulario RSVP con simulación de envío
+- Tour interactivo del sitio
+- Modo oscuro/claro
+- Demo disclaimer flotante (personalizable)
+- Diseño completamente responsivo
+- Optimización de rendimiento con lazy loading
+- Enlaces a Google Calendar e iCal
 
-- **Frontend:** React 18 + Vite
-- **Estilos:** Tailwind CSS
-- **Animaciones:** Framer Motion
-- **Iconos:** Lucide React
-- **Formulario:** EmailJS / Google Sheets
-- **Deploy:** Vercel
+## Público objetivo
 
-## Dominio
+- Parejas que buscan una invitación digital moderna para su boda
+- Organizadores de eventos que quieren una solución digital
+- Desarrolladores que buscan una base sólida para proyectos de invitaciones
 
-Producido por **MVGN Labs** — https://mvgn.vercel.app
-URL de producción: https://boda-jorge-noemi.vercel.app
+## Stack tecnológico
+
+- React 18 con componentes memoizados
+- Vite como bundler
+- Tailwind CSS para estilos
+- Framer Motion para animaciones
+- Lucide React para iconografía
+- Desplegado en Vercel

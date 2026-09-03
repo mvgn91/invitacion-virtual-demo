@@ -1,56 +1,73 @@
+import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="relative py-6 px-4 bg-gradient-to-br from-slate-50 via-white to-rose-50">
-      <div className="max-w-4xl mx-auto">
+    <footer className="relative bg-petal-100/40 dark:bg-stone-900 text-stone-600 dark:text-stone-400 overflow-hidden border-t border-rose-200/20 dark:border-rose-900/20">
+      {/* Brillo sutil sólido */}
+      <div className="absolute inset-0 opacity-[0.04] dark:opacity-[0.02]">
+        <div className="absolute inset-0 bg-rose-100 dark:bg-rose-900"></div>
+      </div>
+
+      <div className="relative max-w-4xl mx-auto px-4 py-16">
         <motion.div
-          className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:justify-between"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7 }}
+          className="text-center"
         >
-          {/* Logo iniciales */}
-          <motion.div 
-            className="flex items-center"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.2 }}
-          >
-            <span className="text-burgundy-800 font-fraunces font-bold text-lg sm:text-xl md:text-2xl tracking-wider">N & J</span>
-          </motion.div>
+          {/* Hashtag */}
+          <div className="mb-8">
+            <span className="inline-block px-6 py-2 bg-white/60 dark:bg-white/10 backdrop-blur-sm rounded-full text-rose-500 dark:text-rose-400 font-light tracking-wider text-sm border border-rose-200/30 dark:border-rose-800/30 shadow-sm">
+              #BodaMariaYCarlos
+            </span>
+          </div>
 
-          {/* Hashtag y Creditos */}
-          <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
-            <motion.div 
-              className="px-3 sm:px-4 py-2 bg-gradient-to-r from-rose-500/20 to-burgundy-500/20 backdrop-blur-md rounded-xl border border-rose/30 cursor-pointer hover:bg-rose/30 hover:border-rose/60 transition-all duration-300"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <h3 className="text-xs sm:text-sm font-fraunces font-bold text-burgundy-800 tracking-wider hover:text-rose-600 transition-colors duration-300">
-                #BodaNoemiYJorge
-              </h3>
-            </motion.div>
+          {/* Nombres */}
+          <h3 className="text-3xl md:text-4xl font-fraunces font-bold text-rose-700 dark:text-rose-400 mb-2">
+            María Elena & Carlos Antonio
+          </h3>
+          <p className="text-stone-400 dark:text-stone-500 font-light text-lg mb-8">
+            15 de Noviembre, 2026
+          </p>
 
-            <motion.a
-              href="https://mvgn.vercel.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative px-3 sm:px-4 py-2 bg-gradient-to-r from-slate-500/20 to-slate-600/20 backdrop-blur-md rounded-xl border border-slate/30 cursor-pointer hover:from-burgundy-500/30 hover:to-wine-500/30 hover:border-burgundy/50 transition-all duration-500 overflow-hidden"
-              whileHover={{ scale: 1.08, y: -3 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {/* Efecto de brillo animado */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
-              
-              <h3 className="relative z-10 text-xs sm:text-sm font-poppins font-semibold text-slate-700 tracking-wide group-hover:text-burgundy-800 transition-colors duration-500">
-                Designed By MVGN Labs
-              </h3>
-              
-              {/* Partículas decorativas */}
-              <div className="absolute top-1 right-1 w-1 h-1 bg-burgundy-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="absolute bottom-1 left-1 w-1 h-1 bg-wine-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            </motion.a>
+          {/* Separador */}
+          <div className="w-16 h-0.5 bg-rose-300/50 mx-auto mb-8" />
+
+          {/* Créditos */}
+          <p className="text-stone-400 dark:text-stone-500 text-sm mb-6">
+            Sitio demo con fines de portafolio y demostración técnica.
+          </p>
+
+          {/* Feature tags */}
+          <div className="flex flex-wrap justify-center gap-2 mb-8">
+            {['React 18', 'Vite', 'Tailwind CSS', 'Framer Motion', 'Responsive', 'PWA Ready'].map((tag) => (
+              <span
+                key={tag}
+                className="px-3 py-1 bg-white/50 dark:bg-white/10 backdrop-blur-sm border border-rose-200/20 dark:border-rose-800/20 rounded-full text-xs text-stone-400 dark:text-stone-500"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {/* Línea divisoria */}
+          <div className="border-t border-rose-200/20 dark:border-rose-900/20 pt-8">
+            <p className="text-stone-400 dark:text-stone-500 text-xs">
+              &copy; {currentYear} —{' '}
+              <a
+                href="https://mvgn.vercel.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-rose-500 hover:text-rose-600 dark:text-rose-400 dark:hover:text-rose-300 transition-colors duration-300"
+              >
+                MVGN Labs
+              </a>
+              {' '}• Demo Version
+            </p>
           </div>
         </motion.div>
       </div>
@@ -58,4 +75,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default memo(Footer);

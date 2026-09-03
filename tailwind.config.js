@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -12,48 +13,44 @@ export default {
         'allura': ['Allura', 'cursive'],
       },
       colors: {
-        // Paleta de colores elegante sin grises ni verdes
-        'burgundy': {
-          50: '#fdf2f8',
-          100: '#fce7f3',
-          200: '#f9d1e7',
-          300: '#f4a5d1',
-          400: '#ed70bb',
-          500: '#c4176a', // C4176A - Rosa principal
-          600: '#a8145a',
-          700: '#8c114a',
-          800: '#700e3b',
-          900: '#590f2f', // 59103F - Borgoña oscuro
+        // 🌹 PALETA TRADICIONAL DE BODA — Estilo Crystal Clear
+        'blush': {
+          50: '#fef7f9',
+          100: '#fce8ef',
+          200: '#f9d1df',
+          300: '#f4a9c3',
+          400: '#ee7aa0',
+          500: '#e54d7d',
+          600: '#d42d5e',
+          700: '#b01e45',
+          800: '#8f1b39',
+          900: '#771b33',
         },
-        'wine': {
-          50: '#fef7f7',
-          100: '#fdeeee',
-          200: '#fbdcdc',
-          300: '#f8c4c4',
-          400: '#f4a6a6',
-          500: '#890f2d', // 890F2D - Vino oscuro
-          600: '#7b0d28',
-          700: '#6d0b23',
-          800: '#5f091e',
-          900: '#510719',
+        'champagne': {
+          50: '#fefcf8',
+          100: '#fdf7ed',
+          200: '#f9edd6',
+          300: '#f4dfb8',
+          400: '#edcc94',
+          500: '#e5b670',
+          600: '#d9a156',
+          700: '#c08b48',
+          800: '#9d713e',
+          900: '#7e5c34',
         },
-        'pearl': {
-          50: '#fefefe',
-          100: '#fdfdfd',
-          200: '#fbfbfb',
-          300: '#f8f8f8',
-          400: '#f5f5f5',
-          500: '#d1dadc', // D1DADC - Perla principal
-          600: '#bcc7ca',
-          700: '#a7b4b8',
-          800: '#92a1a6',
-          900: '#7d8e94',
+
+        'petal': {
+          50: '#fcf9f7',
+          100: '#f9f3ed',
+          200: '#f2e5d9',
+          300: '#e8d2bf',
+          400: '#ddbaa0',
+          500: '#d3a384',
+          600: '#c58b69',
+          700: '#b17552',
+          800: '#926047',
+          900: '#774f3d',
         },
-        // Colores de acento
-        'rose': '#c4176a',
-        'pearl-light': '#d1dadc',
-        'burgundy-dark': '#590f2f',
-        'wine-dark': '#890f2d',
       },
       animation: {
         'fade-in': 'fadeIn 0.8s ease-out',
@@ -78,4 +75,3 @@ export default {
   },
   plugins: [],
 }
-

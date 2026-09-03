@@ -88,9 +88,9 @@ npm run build
    - `src/components/Countdown.jsx` — Fecha del evento
    - `src/components/EventLocations.jsx` — Ubicaciones y mapas
 
-2. **Configurar RSVP real** (opcional):
-   - Crear cuenta en [EmailJS](https://www.emailjs.com/)
-   - Configurar credenciales en `src/config/emailjs.example.js`
+2. **Configurar RSVP real** (opcional — la demo trae el envío desactivado):
+   - Completar `GOOGLE_SCRIPT_URL` en `src/config/googleSheets.js`
+   - Desplegar `google-apps-script.js` como Google Apps Script Web App (ver `INSTRUCCIONES_GOOGLE_SHEETS.md`)
 
 3. **Reemplazar imágenes** de Unsplash con fotos reales de la pareja
 
@@ -107,16 +107,14 @@ npm run build
 ├── src/
 │   ├── main.jsx             ← Entry point React
 │   ├── App.jsx              ← Componente raíz (lazy loading)
-│   ├── components/          ← 15 componentes de UI
-│   ├── config/              ← Configuración (EmailJS, Google Sheets)
+│   ├── components/          ← 16 componentes de UI
+│   ├── config/              ← Configuración (Google Sheets / RSVP)
 │   ├── context/             ← ThemeContext (modo oscuro)
 │   └── hooks/               ← Custom hooks (intersection, preload, scroll)
 ├── docs/                    ← Documentación MVGN del proyecto
 ├── dist/                    ← Build de producción
 └── vercel.json              ← Configuración Vercel
 ```
-
-> **Nota:** El código fuente está dentro del directorio `DEMO VERSION DEFINITIVA/`.
 
 ---
 

@@ -1,12 +1,12 @@
 {
-  "name": "invitacion-boda-jorge-mata",
+  "name": "invitacion-boda-demo-portfolio",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Elegante invitación digital para la boda de Jorge Isaac y Noemí Sarahi",
-  "keywords": ["wedding", "invitation", "react", "vite", "tailwind"],
-  "author": "Jorge Isaac & Noemí Sarahi",
-  "homepage": "https://boda-jorge-noemi.vercel.app",
+  "description": "🎯 DEMO - Invitación digital de boda interactiva para portafolio (María Elena & Carlos Antonio)",
+  "keywords": ["wedding", "invitation", "react", "vite", "tailwind", "demo", "portfolio"],
+  "author": "MVGN Labs",
+  "homepage": "https://invitacion-boda-demo.vercel.app",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

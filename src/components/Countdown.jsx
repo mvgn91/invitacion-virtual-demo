@@ -1,19 +1,79 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect, useMemo, memo } from 'react';
-import { Heart, Calendar, Clock, Sparkles } from 'lucide-react';
 
-
-// Componente memoizado para evitar re-renders innecesarios
-const Countdown = memo(() => {
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0
-  });
+/* ── TimeUnitCard: Una tarjeta por unidad de tiempo ── */
+const TimeUnitCard = memo(({ value, label, accent = 'rose', index }) => {
+  const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
-    const targetDate = new Date('2025-11-15T19:00:00').getTime();
+    setAnimate(true);
+    const timer = setTimeout(() => setAnimate(false), 400);
+    return () => clearTimeout(timer);
+  }, [value]);
+
+  const accentBorder = accent === 'champagne' ? 'border-champagne-200/40' : 'border-rose-200/40';
+  const accentText = accent === 'champagne' ? 'text-champagne-600 dark:text-champagne-400' : 'text-rose-600 dark:text-rose-400';
+  const accentLabel = accent === 'champagne' ? 'bg-champagne-50/80 dark:bg-champagne-900/40 text-champagne-600 dark:text-champagne-400' : 'bg-rose-50/80 dark:bg-rose-900/40 text-rose-500 dark:text-rose-400';
+  const accentLine = accent === 'champagne' ? 'bg-champagne-300/40 dark:bg-champagne-700/40' : 'bg-rose-300/40 dark:bg-rose-700/40';
+
+  return (
+    <motion.div
+      className="flex flex-col items-center gap-2 sm:gap-3"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, delay: index * 0.12, ease: [0.25, 0.46, 0.45, 0.94] }}
+      viewport={{ once: true }}
+    >
+      {/* Card del número — sin aspect-ratio forzado, padding uniforme */}
+      <div
+        className={`
+          relative w-full min-w-[70px] max-w-[130px] px-3 sm:px-4 md:px-5
+          py-5 sm:py-6 md:py-7 rounded-2xl sm:rounded-3xl
+          bg-white/75 dark:bg-stone-800/75 backdrop-blur-xl
+          border ${accentBorder}
+          shadow-lg shadow-rose-200/5 dark:shadow-black/20
+          flex items-center justify-center
+          overflow-hidden
+          transition-all duration-300
+          ${animate ? 'scale-[0.96]' : 'scale-100'}
+        `}
+      >
+        {/* Brillo superior */}
+        <div className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-white/40 to-transparent pointer-events-none" />
+
+        {/* Número — tabular-nums para ancho uniforme de dígitos */}
+        <span
+          className={`
+            relative z-10 font-fraunces font-bold ${accentText}
+            text-[clamp(2.5rem,12vw,4.8rem)]
+            leading-none select-none tabular-nums
+            transition-all duration-300
+            ${animate ? 'opacity-50 scale-[0.85]' : 'opacity-100 scale-100'}
+          `}
+        >
+          {String(value).padStart(2, '0')}
+        </span>
+
+        {/* Línea decorativa al fondo */}
+        <div className={`absolute bottom-3 sm:bottom-4 left-[30%] right-[30%] h-[1.5px] rounded-full ${accentLine}`} />
+      </div>
+
+      {/* Label como pill */}
+      <span className={`px-3 py-1 text-[10px] sm:text-xs font-poppins font-semibold uppercase tracking-[0.15em] rounded-full ${accentLabel}`}>
+        {label}
+      </span>
+    </motion.div>
+  );
+});
+
+TimeUnitCard.displayName = 'TimeUnitCard';
+
+/* ── Countdown principal ── */
+const Countdown = memo(() => {
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+
+  useEffect(() => {
+    const targetDate = new Date('2026-11-15T18:00:00').getTime();
 
     const timer = setInterval(() => {
       const now = new Date().getTime();
@@ -24,7 +84,6 @@ const Countdown = memo(() => {
         const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
         setTimeLeft({ days, hours, minutes, seconds });
       } else {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -34,130 +93,68 @@ const Countdown = memo(() => {
     return () => clearInterval(timer);
   }, []);
 
-  const containerVariants = useMemo(() => ({
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 1.2,
-        staggerChildren: 0.15,
-      },
-    },
-  }), []);
-
-  const itemVariants = useMemo(() => ({
-    hidden: { opacity: 0, y: 30, scale: 0.9 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.8,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      },
-    },
-  }), []);
-
   const timeUnits = useMemo(() => [
-    { label: 'Días', value: timeLeft.days, color: 'from-rose to-burgundy-500' },
-    { label: 'Horas', value: timeLeft.hours, color: 'from-burgundy-400 to-burgundy-600' },
-    { label: 'Minutos', value: timeLeft.minutes, color: 'from-burgundy-400 to-wine-500' },
-    { label: 'Segundos', value: timeLeft.seconds, color: 'from-wine-400 to-rose' },
+    { label: 'Días', value: timeLeft.days, accent: 'rose' },
+    { label: 'Horas', value: timeLeft.hours, accent: 'champagne' },
+    { label: 'Minutos', value: timeLeft.minutes, accent: 'rose' },
+    { label: 'Segundos', value: timeLeft.seconds, accent: 'champagne' },
   ], [timeLeft.days, timeLeft.hours, timeLeft.minutes, timeLeft.seconds]);
 
   return (
-    <section id="countdown" className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8 bg-gradient-to-br from-burgundy-50 via-burgundy-100 to-burgundy-200 relative overflow-hidden">
-      {/* Fondo decorativo */}
-      <div className="absolute inset-0 opacity-[0.02]">
-        <div className="absolute top-10 left-10 w-32 h-32 border border-rose/30 rounded-full"></div>
-        <div className="absolute top-20 right-20 w-24 h-24 border border-burgundy-300/30 rounded-full"></div>
-        <div className="absolute bottom-20 left-20 w-28 h-28 border border-burgundy-300/30 rounded-full"></div>
-        <div className="absolute bottom-10 right-10 w-36 h-36 border border-wine-300/30 rounded-full"></div>
+    <section
+      id="countdown"
+      className="relative py-16 sm:py-20 md:py-24 lg:py-28 px-4 sm:px-6 md:px-8 overflow-hidden bg-rose-50/40 dark:bg-stone-900"
+    >
+      {/* Decoración de fondo */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-rose-100/40 dark:bg-rose-900/30 blur-3xl" />
+        <div className="absolute -bottom-20 -left-20 w-72 h-72 rounded-full bg-champagne-100/30 dark:bg-champagne-900/20 blur-3xl" />
       </div>
 
-      <div className="max-w-6xl mx-auto relative z-10">
+      <div className="max-w-5xl mx-auto relative z-10">
+        {/* Encabezado */}
         <motion.div
-          className="text-center mb-12 sm:mb-16 md:mb-20"
-          initial={{ opacity: 0, y: 40 }}
+          className="text-center mb-10 sm:mb-14"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
+          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-fraunces font-bold text-burgundy-800 mb-6 sm:mb-8 tracking-tight relative inline-block drop-shadow-[0_0_20px_rgba(139,69,19,0.2)]">
-            <span className="relative z-10">Cuenta Regresiva</span>
-            <div className="absolute -inset-2 bg-gradient-to-r from-rose/30 via-burgundy-300/30 to-rose/30 blur-lg opacity-70 animate-pulse rounded-lg"></div>
-            <div className="absolute -inset-1 bg-gradient-to-r from-rose/20 via-burgundy-300/20 to-rose/20 blur-md opacity-50 rounded-md"></div>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-fraunces font-bold text-rose-700 dark:text-rose-400 mb-4 sm:mb-6 tracking-tight">
+            Cuenta Regresiva
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-burgundy-600 max-w-3xl mx-auto leading-relaxed font-light">
-            El gran día se acerca. ¡No podemos esperar para celebrar contigo!
+          <p className="text-base sm:text-lg md:text-xl text-stone-500 dark:text-stone-400 max-w-2xl mx-auto leading-relaxed font-light">
+            La emoción crece mientras esperamos el día especial
           </p>
         </motion.div>
 
-        <motion.div
-          className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 lg:gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
+        {/* Grid de cards — uniforme con auto-fill */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 md:gap-6 max-w-xs sm:max-w-2xl lg:max-w-3xl mx-auto">
           {timeUnits.map((unit, index) => (
-            <motion.div
+            <TimeUnitCard
               key={unit.label}
-              className="relative group"
-              variants={itemVariants}
-              whileHover={{ 
-                scale: 1.05,
-                transition: { duration: 0.3 }
-              }}
-            >
-              <div className="relative bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 border border-rose/20 shadow-lg hover:shadow-xl transition-all duration-500 group-hover:border-rose/40">
-                {/* Efecto de brillo en hover */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-rose/5 to-burgundy-300/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                
-                {/* Número principal */}
-                <div className="relative z-10 text-center">
-                  <motion.div
-                    className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-fraunces font-bold bg-gradient-to-br ${unit.color} bg-clip-text text-transparent mb-2 sm:mb-3 md:mb-4`}
-                    key={unit.value}
-                    initial={{ scale: 1.3, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ 
-                      duration: 0.5,
-                      ease: [0.25, 0.46, 0.45, 0.94]
-                    }}
-                  >
-                    {unit.value.toString().padStart(2, '0')}
-                  </motion.div>
-                  
-                  {/* Etiqueta */}
-                  <p className="text-xs sm:text-sm md:text-base font-poppins font-medium text-burgundy-600 uppercase tracking-wider">
-                    {unit.label}
-                  </p>
-                </div>
-
-                {/* Elemento decorativo */}
-                <div className={`absolute top-4 right-4 w-3 h-3 bg-gradient-to-br ${unit.color} rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300`}></div>
-              </div>
-            </motion.div>
+              value={unit.value}
+              label={unit.label}
+              accent={unit.accent}
+              index={index}
+            />
           ))}
-        </motion.div>
+        </div>
 
-        {/* Mensaje final mejorado */}
+        {/* Mensaje final */}
         <motion.div
-          className="text-center mt-12 sm:mt-16"
+          className="text-center mt-10 sm:mt-14"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.8 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
           viewport={{ once: true }}
         >
-          <div className="inline-block px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-rose/10 to-burgundy-300/10 rounded-xl sm:rounded-2xl border border-rose/20">
-            <p className="text-base sm:text-lg font-poppins text-burgundy-600 italic font-medium">
+          <div className="inline-block px-6 sm:px-8 py-3 sm:py-4 bg-white/60 dark:bg-stone-800/60 backdrop-blur-lg rounded-xl sm:rounded-2xl border border-rose-200/30 dark:border-rose-800/30 shadow-sm">
+            <p className="text-base sm:text-lg font-poppins text-rose-600 dark:text-rose-400 italic font-medium">
               ¡Nos vemos pronto!
             </p>
           </div>
         </motion.div>
-
       </div>
     </section>
   );

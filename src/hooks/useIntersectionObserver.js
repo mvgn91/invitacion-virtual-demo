@@ -14,7 +14,6 @@ const useIntersectionObserver = (options = {}) => {
         const isVisible = entry.isIntersecting;
         setIsIntersecting(isVisible);
         
-        // Una vez que se ve, mantener el estado
         if (isVisible && !hasIntersected) {
           setHasIntersected(true);
         }

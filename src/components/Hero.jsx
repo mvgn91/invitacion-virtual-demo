@@ -1,29 +1,45 @@
 import { motion } from 'framer-motion';
-import { Heart, MapPin, Calendar, ChevronDown, Sparkles } from 'lucide-react';
-import { useState, useEffect, useMemo, memo, useCallback } from 'react';
-import OptimizedImage from './OptimizedImage';
+import { Heart, Sparkles, ChevronDown, Calendar } from 'lucide-react';
+import { useState, useMemo, memo, useCallback } from 'react';
 
+/* ── Gradient Blob — orbe de color animado ── */
+const GradientBlob = memo(({ color, x, y, size, delay, duration }) => (
+  <motion.div
+    className="absolute rounded-full pointer-events-none"
+    style={{
+      width: size,
+      height: size,
+      background: `radial-gradient(circle at 30% 30%, ${color} 0%, transparent 65%)`,
+      left: x,
+      top: y,
+      willChange: 'transform, opacity',
+    }}
+    animate={{
+      x: [0, 80, -60, 40, 0],
+      y: [0, -60, 80, -40, 0],
+      scale: [1, 1.15, 0.9, 1.05, 1],
+      opacity: [0.5, 0.7, 0.4, 0.6, 0.5],
+    }}
+    transition={{
+      duration: duration || 10,
+      repeat: Infinity,
+      ease: 'easeInOut',
+      delay: delay || 0,
+    }}
+  />
+));
+
+GradientBlob.displayName = 'GradientBlob';
+
+/* ── Hero Principal ── */
 const Hero = memo(() => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  // Imágenes de parejas más elegantes y variadas - optimizadas
-  const coupleImages = useMemo(() => [
-    'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80',
-    'https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80',
-    'https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80',
-    'https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80'
-  ], []);
-
-  // Auto-rotación de imágenes cada 6 segundos
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => 
-        prevIndex === coupleImages.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 6000);
-
-    return () => clearInterval(interval);
-  }, [coupleImages.length]);
+  const handleMouseMove = useCallback((e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 20;
+    const y = (e.clientY / window.innerHeight - 0.5) * 20;
+    setMousePos({ x, y });
+  }, []);
 
   const scrollToSection = useCallback((sectionId) => {
     const element = document.getElementById(sectionId);
@@ -32,245 +48,245 @@ const Hero = memo(() => {
     }
   }, []);
 
+  // Partículas decorativas
+  const particles = useMemo(() => Array.from({ length: 25 }, (_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: Math.random() * 4 + 2,
+    delay: Math.random() * 5,
+    duration: Math.random() * 6 + 6,
+    opacity: Math.random() * 0.25 + 0.08,
+  })), []);
+
   return (
-    <section id="hero" className="relative h-screen max-h-[100vh] overflow-hidden">
-      {/* Fondo principal con gradiente de la paleta - menos intenso */}
-      <div className="absolute inset-0 bg-gradient-to-br from-burgundy-900/80 via-wine-900/70 to-burgundy-800/80"></div>
-      
-      {/* Patrón decorativo de fondo - reducido */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 20% 20%, rgba(196,23,106,0.2) 0%, transparent 50%),
-                           radial-gradient(circle at 80% 80%, rgba(137,15,45,0.15) 0%, transparent 50%),
-                           radial-gradient(circle at 50% 50%, rgba(209,218,220,0.05) 0%, transparent 70%)`,
-        }}></div>
+    <section
+      id="hero"
+      className="relative min-h-screen overflow-hidden bg-[#f5f0ec] dark:bg-stone-950"
+      onMouseMove={handleMouseMove}
+    >
+      {/* ═══ GLASSMORPHISM BACKGROUND ═══ */}
+      {/* Gradiente base visible con tonos cálidos */}
+      <div
+        className="absolute inset-0 dark:opacity-20 dark:mix-blend-overlay"
+        style={{
+          background: 'linear-gradient(160deg, #fce8ef 0%, #fdf7ed 30%, #f9f3ed 55%, #f5f0ec 75%, #fefcf8 100%)',
+        }}
+      />
+
+      {/* Capa decorativa — gradiente radial animado con backgroundPosition (fluido sin snaps) */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none dark:opacity-30"
+        style={{
+          background: 'radial-gradient(ellipse 80% 55% at 50% 50%, rgba(244,169,195,0.25) 0%, rgba(229,182,112,0.15) 35%, transparent 65%)',
+          backgroundSize: '220% 220%',
+        }}
+        animate={{
+          backgroundPosition: ['0% 0%', '100% 0%', '100% 100%', '0% 100%', '0% 0%'],
+        }}
+        transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
+      />
+
+      {/* Grain texture overlay — sutil textura de papel */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.07] mix-blend-soft-light"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+          backgroundSize: '256px 256px',
+        }}
+      />
+
+      {/* Orbes de gradiente con parallax de mouse */}
+      <div
+        className="absolute inset-0 overflow-hidden"
+        style={{
+          transform: `translate(${mousePos.x * 0.5}px, ${mousePos.y * 0.5}px)`,
+          transition: 'transform 0.3s ease-out',
+        }}
+      >
+        <GradientBlob color="rgba(244, 169, 195, 0.15)" x="-5%" y="5%" size="65vmax" delay={0} duration={12} />
+        <GradientBlob color="rgba(229, 182, 112, 0.12)" x="40%" y="-15%" size="55vmax" delay={2} duration={14} />
+        <GradientBlob color="rgba(213, 163, 132, 0.1)" x="55%" y="35%" size="50vmax" delay={4} duration={11} />
+        <GradientBlob color="rgba(244, 169, 195, 0.08)" x="15%" y="50%" size="45vmax" delay={6} duration={13} />
+        <GradientBlob color="rgba(229, 182, 112, 0.06)" x="75%" y="55%" size="40vmax" delay={3} duration={15} />
+        <GradientBlob color="rgba(244, 169, 195, 0.05)" x="30%" y="75%" size="35vmax" delay={5} duration={16} />
       </div>
 
-      {/* Carrusel de imágenes de fondo con overlay elegante - optimizado */}
-      <div className="absolute inset-0 overflow-hidden">
-        {coupleImages.map((image, index) => (
-          <motion.div
-            key={index}
-            className="absolute inset-0 w-full h-full"
-            initial={{ opacity: 0 }}
-            animate={{ 
-              opacity: index === currentImageIndex ? 0.6 : 0,
-              scale: index === currentImageIndex ? 1.05 : 1
-            }}
-            transition={{ 
-              duration: 2.5, 
-              ease: "easeInOut" 
-            }}
-          >
-            <OptimizedImage
-              src={image}
-              alt={`Imagen de boda ${index + 1}`}
-              className="w-full h-full"
-              priority={index === 0}
-            />
-            <div 
-              className="absolute inset-0"
-              style={{
-                filter: 'blur(0.2px) brightness(0.8)',
-              }}
-            />
-          </motion.div>
-        ))}
-        {/* Overlay con gradiente de la paleta - más sutil */}
-        <div className="absolute inset-0 bg-gradient-to-t from-burgundy-900/30 via-burgundy-800/10 to-wine-900/20"></div>
-      </div>
-
-      {/* Elementos decorativos flotantes originales */}
+      {/* Partículas decorativas */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(6)].map((_, i) => (
+        {particles.map((p) => (
           <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-pearl-500/30 rounded-full"
+            key={p.id}
+            className="absolute rounded-full"
             style={{
-              left: `${20 + i * 15}%`,
-              top: `${30 + (i % 3) * 20}%`,
+              width: p.size,
+              height: p.size,
+              left: `${p.x}%`,
+              top: `${p.y}%`,
+              backgroundColor: p.id % 3 === 0
+                ? 'rgba(244, 169, 195, 0.3)'
+                : p.id % 3 === 1
+                  ? 'rgba(229, 182, 112, 0.2)'
+                  : 'rgba(255,255,255,0.3)',
             }}
             animate={{
-              y: [0, -20, 0],
-              opacity: [0.3, 0.8, 0.3],
+              y: [0, -25 - Math.random() * 15, 0],
+              opacity: [p.opacity, p.opacity * 2.5, p.opacity],
             }}
             transition={{
-              duration: 3 + i * 0.5,
+              duration: p.duration,
               repeat: Infinity,
-              ease: "easeInOut",
-              delay: i * 0.5,
+              ease: 'easeInOut',
+              delay: p.delay,
             }}
           />
         ))}
       </div>
 
-      {/* Contenido principal - Mobile First con mejor distribución */}
-      <div className="relative z-10 flex flex-col justify-between min-h-screen px-3 pt-8 pb-20 sm:px-4 sm:pt-12 sm:pb-24 md:px-6 md:pt-16 md:pb-28 lg:px-8 lg:pt-20 lg:pb-32">
-        <div className="w-full max-w-6xl mx-auto flex-1 flex flex-col justify-center">
-          
-          {/* Layout centrado con mejor espaciado */}
-          <div className="text-center space-y-6 sm:space-y-6 md:space-y-8 lg:space-y-10">
+      {/* ═══ OVERLAY CRISTAL ═══ */}
+      <div
+        className="absolute inset-0 pointer-events-none dark:opacity-0"
+        style={{
+          background: 'linear-gradient(180deg, rgba(245,240,236,0) 0%, rgba(245,240,236,0.2) 50%, rgba(245,240,236,0.5) 80%, rgba(245,240,236,0.8) 100%)',
+        }}
+      />
+
+      {/* ═══ CONTENIDO — FLUJO VERTICAL ═══ */}
+      <div className="relative z-10 flex flex-col min-h-screen px-4 sm:px-8 md:px-12 lg:px-16">
+        
+        {/* ── ZONA SUPERIOR: NOMBRES (flex-1 para centrar verticalmente) ── */}
+        <div className="flex-1 flex flex-col justify-center pt-12 sm:pt-16 md:pt-20 pb-6 sm:pb-8">
+          <div className="text-center max-w-5xl mx-auto w-full">
             
-            {/* Título principal - Mobile First */}
+            {/* Badge */}
             <motion.div
-              className="space-y-3 sm:space-y-4 md:space-y-5"
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.5 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/60 dark:bg-stone-800/60 backdrop-blur-xl rounded-full border border-rose-200/30 dark:border-rose-800/30 shadow-sm mx-auto mb-6 sm:mb-8 md:mb-10"
             >
-              <motion.p
-                className="text-pearl-300 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-poppins tracking-[0.1em] sm:tracking-[0.15em] md:tracking-[0.2em] lg:tracking-[0.3em] uppercase px-2 sm:px-4 md:px-8 lg:px-12 xl:px-16 2xl:px-20"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.7 }}
-              >
-                Invitación de Boda
-              </motion.p>
-
-              <h1 className="font-fraunces font-bold leading-[0.75] sm:leading-[0.8] md:leading-[0.85] lg:leading-[0.9] tracking-tight" style={{ fontSize: 'min(14svh, 6em)' }}>
-                <motion.div
-                  className="space-y-0 sm:space-y-0 md:space-y-1"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 1, delay: 0.9 }}
-                >
-                  <motion.div
-                    className="block"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 1.1 }}
-                  >
-                    <motion.span
-                      style={{
-                        background: "linear-gradient(45deg, #c4176a, #890f2d, #d1dadc, #c4176a)",
-                        backgroundSize: "400% 400%",
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                        backgroundClip: "text",
-                        color: "transparent"
-                      }}
-                      animate={{
-                        backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-                      }}
-                      transition={{
-                        duration: 12,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                    >
-                      Noemí Sarahi
-                    </motion.span>
-                  </motion.div>
-                  
-                  <motion.div
-                    className="flex items-center justify-center my-0 sm:my-0 md:my-0 py-0 sm:py-0 md:py-0"
-                    initial={{ scale: 0, rotate: -45 }}
-                    animate={{ scale: 1, rotate: 0 }}
-                    transition={{ duration: 1, delay: 1.3, ease: "easeOut" }}
-                  >
-                    <motion.span 
-                      className="font-fraunces italic block"
-                      style={{ 
-                        fontSize: 'min(8svh, 3.2em)',
-                        background: "linear-gradient(45deg, #d1dadc, #c4176a, #890f2d, #d1dadc)",
-                        backgroundSize: "400% 400%",
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                        backgroundClip: "text",
-                        color: "transparent",
-                        lineHeight: "0.8",
-                        padding: "0.1em 0.2em",
-                        height: "auto",
-                        overflow: "visible",
-                        width: "auto",
-                        minWidth: "1em"
-                      }}
-                      animate={{ 
-                        backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                        textShadow: [
-                          "0 0 0px rgba(209,218,220,0)",
-                          "0 0 15px rgba(209,218,220,0.4)",
-                          "0 0 0px rgba(209,218,220,0)"
-                        ]
-                      }}
-                      transition={{ 
-                        backgroundPosition: {
-                          duration: 8,
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        },
-                        textShadow: {
-                          duration: 6, 
-                          repeat: Infinity, 
-                          ease: "easeInOut" 
-                        }
-                      }}
-                    >
-                      &
-                    </motion.span>
-                  </motion.div>
-                  
-                  <motion.div
-                    className="block"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 1.1 }}
-                  >
-                    <motion.span
-                      style={{
-                        background: "linear-gradient(45deg, #890f2d, #d1dadc, #c4176a, #890f2d)",
-                        backgroundSize: "400% 400%",
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                        backgroundClip: "text",
-                        color: "transparent"
-                      }}
-                      animate={{
-                        backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-                      }}
-                      transition={{
-                        duration: 12,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: 4
-                      }}
-                    >
-                      Jorge Isaac
-                    </motion.span>
-                  </motion.div>
-                </motion.div>
-              </h1>
-
+              <Sparkles className="w-3.5 h-3.5 text-rose-400" />
+              <span className="text-[10px] sm:text-xs font-poppins font-medium text-rose-500/80 dark:text-rose-400/80 tracking-[0.15em] uppercase">
+                Invitación Digital — Demo Interactiva
+              </span>
             </motion.div>
 
-            {/* Botones de acción - Mobile First con más espacio */}
+            {/* Nombres — tipografía como arte */}
+            <motion.h1
+              className="font-fraunces font-bold leading-[0.82] tracking-tight select-none"
+              style={{ fontSize: 'clamp(3.2rem, 14vw, 10rem)' }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 0.5 }}
+            >
+              <motion.span
+                className="block text-rose-800 dark:text-rose-200"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              >
+                María Elena
+              </motion.span>
+
+              <motion.div
+                className="flex items-center justify-center my-1 sm:my-2"
+                initial={{ scale: 0, rotate: -45 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ duration: 0.9, delay: 1.0, ease: [0.34, 1.56, 0.64, 1] }}
+              >
+                <motion.span
+                  className="font-fraunces italic inline-block text-champagne-500 drop-shadow-sm"
+                  style={{
+                    fontSize: 'clamp(2.2rem, 9vw, 4.5rem)',
+                    lineHeight: 1,
+                    padding: '0.05em 0.15em',
+                  }}
+                >
+                  &amp;
+                </motion.span>
+              </motion.div>
+
+              <motion.span
+                className="block text-rose-800 dark:text-rose-200"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
+              >
+                Carlos Antonio
+              </motion.span>
+            </motion.h1>
+
+
+          </div>
+        </div>
+
+        {/* ── ZONA INFERIOR: INVITACIÓN + CTAs ── */}
+        <div className="pb-16 sm:pb-20 md:pb-24 lg:pb-28">
+          <div className="max-w-4xl mx-auto w-full">
+            
+            {/* Glass card — mensaje de invitación */}
             <motion.div
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-5 lg:gap-6 justify-center mt-10 sm:mt-8 md:mt-10 lg:mt-12"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 1.7 }}
+            >
+              <div              className="bg-white/60 dark:bg-stone-800/60 dark:backdrop-blur-xl rounded-3xl px-6 sm:px-10 md:px-12 py-6 sm:py-8 md:py-10 border border-rose-200/20 dark:border-rose-800/20 shadow-xl shadow-rose-200/10 dark:shadow-black/20">
+                <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
+                  {/* Icono decorativo — solo desktop */}
+                  <div className="hidden sm:flex w-16 h-16 rounded-2xl bg-rose-50/80 border border-rose-200/30 items-center justify-center flex-shrink-0 shadow-inner">
+                    <Heart className="w-7 h-7 text-rose-400" />
+                  </div>
+                  
+                  <div className="flex-1 text-center sm:text-left">
+                    <p className="text-sm sm:text-base md:text-lg lg:text-xl font-poppins text-stone-600 dark:text-stone-300 leading-relaxed font-light">
+                      Con la bendición de Dios y la alegría de nuestras familias,{' '}
+                      <span className="text-rose-600 dark:text-rose-400 font-medium">los invitamos</span> a celebrar
+                      el día más especial de nuestras vidas.
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-rose-200/20 dark:border-rose-800/20 flex flex-col sm:flex-row items-center justify-between gap-3">
+                  <div className="flex items-center gap-2 text-stone-400 dark:text-stone-500">
+                    <Calendar className="w-4 h-4 text-rose-400" />
+                    <span className="text-sm sm:text-base font-poppins font-medium tracking-[0.05em]">
+                      15 de Noviembre, 2026 — 6:00 PM
+                    </span>
+                  </div>
+                  <span className="text-[10px] sm:text-xs font-poppins text-rose-400/60 dark:text-rose-400/80 italic">
+                    Sábado — Catedral de Guadalajara
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Botones de acción */}
+            <motion.div
+              className="flex flex-col sm:flex-row gap-3 sm:gap-5 justify-center items-center mt-6 sm:mt-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.7 }}
+              transition={{ duration: 0.8, delay: 2.2 }}
             >
               <motion.button
                 onClick={() => scrollToSection('rsvp')}
-                className="group relative px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-2 md:py-3 lg:py-4 bg-gradient-to-r from-burgundy-500 to-wine-500 text-white font-poppins font-semibold rounded-full hover:from-burgundy-600 hover:to-wine-600 transition-all duration-300 text-xs sm:text-xs md:text-sm lg:text-base uppercase tracking-wider overflow-hidden active:scale-95 active:from-burgundy-600 active:to-wine-600"
-                whileHover={{ scale: 1.05, y: -2 }}
+                className="group relative px-8 sm:px-10 py-3.5 sm:py-4 bg-rose-500 text-white font-poppins font-semibold rounded-full hover:bg-rose-600 transition-all duration-300 text-sm sm:text-base uppercase tracking-wider shadow-xl shadow-rose-300/30 hover:shadow-rose-400/40 active:scale-95"
+                whileHover={{ scale: 1.05, y: -3 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <span className="relative z-10 flex items-center justify-center gap-1 sm:gap-1 md:gap-2">
-                  <Heart className="w-3 h-3 sm:w-3 sm:h-3 md:w-4 md:h-4 lg:w-5 lg:h-5" />
+                <span className="relative z-10 flex items-center gap-2.5">
+                  <Heart className="w-4 h-4 sm:w-5 sm:h-5" />
                   Confirmar Asistencia
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-burgundy-400 to-wine-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </motion.button>
-              
+
               <motion.button
                 onClick={() => scrollToSection('ceremony')}
-                className="group px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-2 md:py-3 lg:py-4 border-2 border-pearl-400 text-pearl-300 font-poppins font-semibold rounded-full hover:bg-pearl-400 hover:text-burgundy-900 transition-all duration-300 text-xs sm:text-xs md:text-sm lg:text-base uppercase tracking-wider active:scale-95 active:bg-pearl-400/20"
-                whileHover={{ scale: 1.05, y: -2 }}
+                className="group px-8 sm:px-10 py-3.5 sm:py-4 border-2 border-rose-300/50 text-rose-600 font-poppins font-semibold rounded-full hover:bg-white/60 hover:border-rose-300 transition-all duration-300 text-sm sm:text-base uppercase tracking-wider active:scale-95"
+                whileHover={{ scale: 1.05, y: -3 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <span className="flex items-center justify-center gap-1 sm:gap-1 md:gap-2">
-                  <Sparkles className="w-3 h-3 sm:w-3 sm:h-3 md:w-4 md:h-4 lg:w-5 lg:h-5" />
+                <span className="flex items-center gap-2.5">
+                  <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
                   Ver Detalles
                 </span>
               </motion.button>
@@ -279,30 +295,23 @@ const Hero = memo(() => {
         </div>
       </div>
 
-      {/* Scroll indicator - Mobile First */}
-      <motion.div 
-        className="absolute bottom-3 sm:bottom-4 md:bottom-6 lg:bottom-8 left-0 right-0 flex justify-center z-20"
-        initial={{ opacity: 0, y: 20 }}
+      {/* ═══ SCROLL INDICATOR ═══ */}
+      <motion.div
+        className="absolute bottom-4 sm:bottom-6 left-0 right-0 flex justify-center z-20"
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 2.5 }}
+        transition={{ duration: 0.8, delay: 2.8 }}
       >
         <motion.button
           onClick={() => scrollToSection('countdown')}
-          className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 xl:w-20 xl:h-20 bg-pearl-400/20 backdrop-blur-sm border border-pearl-400/50 rounded-full flex items-center justify-center text-pearl-300 hover:bg-pearl-400/30 hover:text-white hover:border-pearl-400/70 transition-all duration-200 active:scale-95 active:bg-pearl-400/40"
+          className="w-12 h-12 sm:w-14 sm:h-14 bg-white/50 backdrop-blur-sm border border-white/60 rounded-full flex items-center justify-center text-rose-400 hover:bg-white/70 hover:text-rose-500 transition-all duration-200 active:scale-95 shadow-lg"
           whileTap={{ scale: 0.95 }}
-          animate={{ y: [0, 4, 0] }}
-          transition={{ 
-            y: { 
-              duration: 2, 
-              repeat: Infinity, 
-              ease: "easeInOut" 
-            } 
-          }}
+          animate={{ y: [0, 5, 0] }}
+          transition={{ y: { duration: 2, repeat: Infinity, ease: 'easeInOut' } }}
         >
-          <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 xl:w-8 xl:h-8" />
+          <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6" />
         </motion.button>
       </motion.div>
-
     </section>
   );
 });

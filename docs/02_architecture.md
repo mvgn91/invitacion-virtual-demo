@@ -1,186 +1,127 @@
-# 02 — Arquitectura del Proyecto
+# 02 — Arquitectura
 
-> **Proyecto:** Invitación de Boda — Jorge & Noemí
+> **Proyecto:** Invitación de Boda Digital - Demo Template / Plantilla Comercial
 > **Versión:** v1.0.0
-> **Estado:** Implementado y desplegado
+> **Estado:** APROBADO
 
 ---
 
-## 1. Diagrama de Arquitectura
+## 1. Stack Tecnológico
+
+| Capa | Tecnología | Versión | Justificación |
+|------|-----------|---------|---------------|
+| Framework | React | 18.2 | Maduro, amplio ecosistema, hooks para estado |
+| Bundler | Vite | 4.4 | Build rápido, HMR instantáneo, code splitting nativo |
+| Estilos | Tailwind CSS | 3.3 | Utilidades first, diseño consistente, responsive fácil |
+| Animaciones | Framer Motion | 10.16 | API declarativa, animaciones fluidas, soporte gestos |
+| Iconos | Lucide React | 0.542 | Iconos ligeros, tree-shakeable, diseño consistente |
+| Email | EmailJS | 4.3 | Integración opcional para RSVP real |
+| Deploy | Vercel | — | Deploy automático, SSL, CDN global |
+
+## 2. Arquitectura de Componentes
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                    Vercel (CDN/Deploy)                   │
-│                   boda-jorge-noemi.vercel.app            │
-├─────────────────────────────────────────────────────────┤
-│                     React SPA v18                        │
-│                                                         │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌────────┐  │
-│  │  Header  │  │   Hero   │  │ Countdown│  │  RSVP  │  │
-│  └──────────┘  └──────────┘  └──────────┘  └────────┘  │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌────────┐  │
-│  │Ceremony  │  │Dress Code│  │ Reception│  │  Gift  │  │
-│  │Details   │  │          │  │          │  │Registry│  │
-│  └──────────┘  └──────────┘  └──────────┘  └────────┘  │
-│  ┌──────────┐  ┌──────────┐                              │
-│  │  Footer  │  │ScrollTo  │                              │
-│  │          │  │Top       │                              │
-│  └──────────┘  └──────────┘                              │
-│                                                         │
-│  ┌──────────────────────────────────────────────────┐   │
-│  │           Custom Hooks Layer                      │   │
-│  │  useIntersectionObserver | usePreload             │   │
-│  │  useScrollOptimization (throttle + debounce)      │   │
-│  └──────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────┘
-         │
-         ├───────────────────┬────────────────────┐
-         ▼                   ▼                    ▼
-  ┌──────────────┐   ┌──────────────┐   ┌──────────────────┐
-  │  Google      │   │   EmailJS    │   │   Google Fonts   │
-  │  Sheets API  │   │   API        │   │   CDN            │
-  │  (RSVPs)     │   │(Notificacion)│   │   (Fraunces,     │
-  │              │   │              │   │    Poppins,       │
-  │              │   │              │   │    Allura)        │
-  └──────────────┘   └──────────────┘   └──────────────────┘
+App.jsx
+├── Header.jsx                  ← Nav sticky + menú mobile + theme toggle
+├── Hero.jsx                    ← Sección principal con parallax
+├── Countdown.jsx               ← Cuenta regresiva en tiempo real
+├── EventLocations.jsx          ← Ceremonia + Recepción con tabs
+│   ├── LocationPill.jsx        ← Pills de navegación
+│   └── LocationPanel.jsx       ← Panel con info + mapa
+├── DressCode.jsx               ← Código de vestimenta
+├── GiftRegistry.jsx            ← Mesa de regalos
+├── RSVP.jsx / RSVPForm.jsx     ← Formulario de confirmación
+├── DemoDisclaimer.jsx          ← Banner demo flotante
+├── SiteTour.jsx                ← Tour interactivo
+├── Footer.jsx                  ← Footer con créditos
+└── ScrollToTop.jsx             ← Botón scroll to top
 ```
 
----
-
-## 2. Componentes
-
-### 2.1 Componentes de UI
-
-| Componente | Responsabilidad | Props | Lazy Loaded |
-|-----------|----------------|-------|-------------|
-| `Header` | Navegación fija, menú hamburguesa, scroll detection | — | No |
-| `Hero` | Carrusel de imágenes, títulos animados, CTAs | — | Sí |
-| `Countdown` | Temporizador en tiempo real hasta la fecha de boda | — | Sí |
-| `CeremonyDetails` | Info de ceremonia, mapa, cita inspiradora | — | Sí |
-| `DressCode` | Código de vestimenta, colores prohibidos | — | Sí |
-| `Reception` | Info de recepción, calendario, mapa | — | Sí |
-| `GiftRegistry` | Enlaces a Liverpool y Amazon | — | Sí |
-| `RSVP` | Sección de confirmación de asistencia | — | Sí |
-| `RSVPForm` | Formulario con validaciones, campos dinámicos | — | Sí (via RSVP) |
-| `Footer` | Créditos, hashtag, enlace MVGN Labs | — | No |
-| `ScrollToTop` | Botón flotante con throttling | — | No |
-| `Plasma` | Efecto WebGL decorativo interactivo | color, speed, scale, opacity | Sí |
-| `OptimizedImage` | Imagen lazy con placeholder y error handling | src, alt, priority | No (utility) |
-
-### 2.2 Custom Hooks
-
-| Hook | Propósito | Uso |
-|------|-----------|-----|
-| `useIntersectionObserver` | Detecta visibilidad de elementos con lazy initialization | Plasma, OptimizedImage |
-| `usePreload` | Precarga recursos críticos (imágenes, CSS) | main.jsx |
-| `useScrollOptimization` | Throttle + Debounce para eventos de scroll | ScrollToTop, Header |
-
----
-
-## 3. Decisiones Técnicas (ADRs)
-
-### ADR-01: React + Vite sobre Next.js
-
-**Contexto:** Se eligió una SPA simple sin necesidad de SSR/SSG.
-**Decisión:** React 18 + Vite por simplicidad, menor bundle y despliegue trivial en Vercel.
-**Consecuencia:** Todo el SEO se maneja mediante meta tags estáticos en `index.html`.
-
-### ADR-02: Tailwind CSS para estilos
-
-**Contexto:** Se necesitaba un sistema de diseño consistente y rápido de prototipar.
-**Decisión:** Tailwind CSS con paleta de colores personalizada (burgundy, wine, rose, pearl).
-**Consecuencia:** Archivo `tailwind.config.js` con colores y animaciones custom. CSS puro adicional en `index.css`.
-
-### ADR-03: Lazy Loading con React.lazy + Suspense
-
-**Contexto:** Múltiples secciones pesadas con animaciones e imágenes.
-**Decisión:** Code splitting con `React.lazy()` y `Suspense` para carga bajo demanda.
-**Consecuencia:** Componentes críticos (Header, Hero) cargan inmediatamente; el resto carga cuando se necesitan.
-
-### ADR-04: Google Sheets como backend de RSVP
-
-**Contexto:** Sin necesidad de servidor propio para almacenar confirmaciones.
-**Decisión:** Google Apps Script como API REST para insertar datos en Google Sheets.
-**Consecuencia:** No hay base de datos que mantener. Límite de tasa de Google Sheets aplica.
-
-### ADR-05: EmailJS para notificaciones
-
-**Contexto:** Los novios necesitan recibir notificaciones de nuevas confirmaciones.
-**Decisión:** EmailJS como servicio de email transaccional sin servidor.
-**Consecuencia:** Configuración simple con Service ID, Template ID y Public Key.
-
-### ADR-06: Vite como build tool con manualChunks
-
-**Contexto:** Optimizar el bundle para producción.
-**Decisión:** Separar vendor chunks (React, framer-motion, lucide-react) para mejor caching.
-**Consecuencia:** Tres chunks principales: `vendor`, `framer`, `icons`.
-
----
-
-## 4. Estructura de Archivos
+## 3. Flujo de datos
 
 ```
-├── index.html                    # Entry point HTML con meta tags SEO
-├── package.json                  # Dependencias y scripts
-├── vite.config.js                # Configuración de Vite (chunks, plugins)
-├── tailwind.config.js            # Configuración de Tailwind (colores, fonts)
-├── postcss.config.js             # PostCSS con Tailwind + Autoprefixer
-├── vercel.json                   # Configuración de deploy en Vercel
-├── .gitignore                    # Archivos ignorados
+[Usuario] → [Componente] → [Estado Local (useState)]
+                                ↓
+                         [Simulación API]
+                                ↓
+                         [Log a consola]
+                                ↓
+                         [Feedback visual]
+```
+
+No hay backend. Todos los datos son simulados en modo demo.
+
+## 4. Decisiones de Arquitectura (ADRs)
+
+### ADR-01: Sin backend
+**Contexto:** Demo de portafolio. No requiere persistencia real.
+**Decisión:** Todo el estado es local. RSVP simula envío con timeout.
+**Consecuencia:** Fácil deploy, 0 costos de infraestructura.
+
+### ADR-02: Lazy loading por componente
+**Contexto:** Múltiples secciones con animaciones pesadas.
+**Decisión:** Cada sección principal se carga con `React.lazy()` + `Suspense`.
+**Consecuencia:** Mejora LCP, First Paint más rápido.
+
+### ADR-03: Glassmorphism como identidad visual
+**Contexto:** Diseño elegante y moderno para invitación de boda.
+**Decisión:** Efectos crystal-glass con backdrop-filter y bordes semitransparentes.
+**Consecuencia:** Consistencia visual en todas las secciones, soporte dark mode.
+
+### ADR-04: Code splitting manual
+**Contexto:** Dependencias grandes como framer-motion y lucide-react.
+**Decisión:** Chunks separados para vendor, framer, icons en vite.config.js.
+**Consecuencia:** Carga paralela de recursos, mejor rendimiento percibido.
+
+## 5. Estructura del Proyecto
+
+```
+DEMO VERSION DEFINITIVA/
+├── index.html                  ← Entry point HTML
+├── vite.config.js              ← Configuración Vite
+├── tailwind.config.js          ← Configuración Tailwind
+├── postcss.config.js           ← Configuración PostCSS
+├── vercel.json                 ← Configuración Vercel
+├── package.json                ← Dependencias y scripts
 ├── src/
-│   ├── main.jsx                  # Entry point React con preload de recursos
-│   ├── App.jsx                   # Componente raíz con lazy loading
-│   ├── index.css                 # Estilos globales + Tailwind + animaciones
-│   ├── components/
-│   │   ├── Header.jsx            # Navegación fija
-│   │   ├── Hero.jsx              # Hero con carrusel
-│   │   ├── Countdown.jsx         # Cuenta regresiva
-│   │   ├── CeremonyDetails.jsx   # Detalles de ceremonia
-│   │   ├── DressCode.jsx         # Código de vestimenta
-│   │   ├── Reception.jsx         # Recepción y calendario
-│   │   ├── GiftRegistry.jsx      # Mesa de regalos
-│   │   ├── RSVP.jsx              # Contenedor RSVP
-│   │   ├── RSVPForm.jsx          # Formulario RSVP
-│   │   ├── Footer.jsx            # Footer
-│   │   ├── ScrollToTop.jsx       # Botón scroll-to-top
-│   │   ├── Plasma.jsx            # Efecto WebGL
-│   │   └── OptimizedImage.jsx    # Imagen lazy
-│   ├── hooks/
-│   │   ├── useIntersectionObserver.js
-│   │   ├── usePreload.js
-│   │   └── useScrollOptimization.js
-│   └── config/
-│       ├── emailjs.example.js    # Config EmailJS (template)
-│       └── googleSheets.js       # Config Google Sheets API
-├── docs/                         # Documentación MVGN
-└── .mvgn/                        # Capas del sistema MVGN
+│   ├── main.jsx                ← Entry point React
+│   ├── App.jsx                 ← Componente raíz con lazy loading
+│   ├── index.css               ← Estilos globales + glassmorphism
+│   ├── components/             ← Componentes de UI
+│   │   ├── Header.jsx
+│   │   ├── Hero.jsx
+│   │   ├── Countdown.jsx
+│   │   ├── EventLocations.jsx
+│   │   ├── CeremonyDetails.jsx
+│   │   ├── Reception.jsx
+│   │   ├── DressCode.jsx
+│   │   ├── GiftRegistry.jsx
+│   │   ├── RSVP.jsx
+│   │   ├── RSVPForm.jsx
+│   │   ├── DemoDisclaimer.jsx
+│   │   ├── SiteTour.jsx
+│   │   ├── Plasma.jsx
+│   │   ├── Footer.jsx
+│   │   ├── ScrollToTop.jsx
+│   │   └── OptimizedImage.jsx
+│   ├── config/
+│   │   ├── emailjs.example.js
+│   │   └── googleSheets.js
+│   ├── context/
+│   │   └── ThemeContext.jsx
+│   └── hooks/
+│       ├── useIntersectionObserver.js
+│       ├── usePreload.js
+│       └── useScrollOptimization.js
+├── dist/                       ← Build de producción
+├── docs/                       ← Documentación MVGN
+└── mvgnlabs-starter-kit-main/  ← Kit MVGN
 ```
 
 ---
 
-## 5. Paleta de Colores
+## Firma de aprobación
 
-| Color | Uso | Hex |
-|-------|-----|-----|
-| Burgundy | Color principal, headers, fondos oscuros | #590f2f |
-| Rose | Acentos, botones, hover states | #c4176a |
-| Wine | Tonos profundos, fondos alternos | #890f2d |
-| Pearl | Textos claros sobre fondos oscuros | #d1dadc |
-
----
-
-## 6. Tipografía
-
-| Fuente | Uso | Peso |
-|--------|-----|------|
-| Fraunces | Títulos (heading 1-4) | Bold (700-900) |
-| Poppins | Cuerpo, navegación, botones | Regular (300-700) |
-| Allura | Decorativa (cargada pero no usada activamente) | Cursiva |
-
----
-
-## Historial de Cambios
-
-| Fecha | Versión | Cambio | Autor |
-|------|---------|--------|-------|
-| 2026-06-24 | v1.0.0 | Documento creado | MVGN System |
+**Nombre:** MVGN Labs
+**Fecha:** 21 Junio 2026
+**Firma:** [✓]
